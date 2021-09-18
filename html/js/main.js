@@ -13,7 +13,7 @@ $(function() {
         var item = '';
 
         // Go through JSON
-        $.each(data, function(key, value) {
+        $.each(data.items, function(key, value) {
             item += '<tr><td>'+value.correlation+'</td><td>'+value.frequency+'</td><td>'+value.productID+'</td>';
         })
         $('#dataResult').append(item)
