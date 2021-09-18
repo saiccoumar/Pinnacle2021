@@ -1,10 +1,10 @@
-## Pinnacle 2021
+# Pinnacle 2021
 Team HackDuke (PMOI) project for Pinnacle 2021.
 
 ### Team Members
 Albert Lua, Sai Coumar, Jason Leong, Daniel Trager
 
-### Initial Setup
+## Initial Setup
 First, the Execution Policy for PowerShell needs to be changed. The following command needs to be run in PowerShell (admin).
 
 ```
