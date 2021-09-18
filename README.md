@@ -1,5 +1,5 @@
-# Pinnacle 2021
-Team HackDuke (PMOI) project for Pinnacle 2021.
+# Pinnacle 2021 - Project AURA
+AURA, Adaptive User Recommendation Algorithm, is a recommendation engine. The algorithms used are the Pearson and FUNK SVD.
 
 ### Team Members
 Albert Lua, Sai Coumar, Jason Leong, Daniel Trager
