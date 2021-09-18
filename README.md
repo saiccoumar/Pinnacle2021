@@ -32,7 +32,7 @@ pinnacle\Scripts\activate.bat
 Verify `(pinnacle)` is present in the beginning of the line for terminal. Now in the virtual environment, install the requirements via pip.
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Now we can run the Flask application.
