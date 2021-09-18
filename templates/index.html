@@ -3,11 +3,11 @@
     <head>
         <title>The Recommender</title>
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/all.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-        <link rel="shortcut icon" href="favicon.svg">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.svg') }}">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#ffbd95">
@@ -104,8 +104,8 @@
             </div>
         </div>
 
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </body>
 </html>
