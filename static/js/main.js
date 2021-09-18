@@ -19,6 +19,13 @@ function updateRateNum(val) {
 }
 
 $(function() {
+    // DBZ Easter Egg
+    $('#easterEgg').on({
+        click: function() {
+            $('#easterEgg').hide();
+            $('#dbz').show();
+        }
+    });
 
     // Add data entry modal
     var addModal = new bootstrap.Modal($('#addModal'));

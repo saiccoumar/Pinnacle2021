@@ -23,6 +23,10 @@
 body {
     background-color: #202020;
 }
+#dbz {
+    display: none;
+    height: 95px;
+}
 
 /* Link Hover Animations */
 a {
