@@ -63,18 +63,6 @@ a:hover {
     position: static;
     width: 100%;
 }
-/* #searchTxt, #addTxt {
-    display: none;
-    -webkit-animation: fadeIn .15s;
-    -moz-animation: fadeIn .15s;
-    -o-animation: fadeIn .15s;
-    -ms-animation: fadeIn .15s;
-    animation: fadeIn .15s;
-}
-#addBtn:hover #addTxt {
-    display: inline;
-    padding-right: 10px;
-} */
 #addBtn:hover, #searchBtn:hover {
     color: #fff;
 }
@@ -83,7 +71,27 @@ a:hover {
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.searchDrop {
+    display: none;
+    position: absolute;
+    margin-top: 38px;
+    background-color: #ffebe1;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 10px 18px;
+}
+.searchDropItem {
+    cursor: pointer;
+    -o-transition: .15s;
+    -ms-transition: .15s;
+    -moz-transition: .15s;
+    -webkit-transition: .15s;
+    transition: .15s;
+}
+.searchDropItem:hover {
+    color: #ea7500;
+    text-decoration: underline;
+}
 
 /* Results */
 .results {
