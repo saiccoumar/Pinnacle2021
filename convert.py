@@ -2,57 +2,67 @@ import sqlite3
 import json
 
 
-con=sqlite3.connect("amazon.db")
-cur = con.cursor()
-f = open("Pet_Supplies_5.json")
+#example call: convert("amazon.db","Movies_and_TV_5.json",("id","asin","overall"))
+def convert(db,inputFile,keys):
+    con=sqlite3.connect(db)
+    cur = con.cursor()
+    f = open(inputFile)
 
-create = """
-create table petSupplies(
-    row integer primary key autoincrement,
-    user varchar(25) not null,
-    rating decimal(2,1),
-    itemID varchar(25) not null
-)
-"""
-drop = "drop table petSupplies"
+    create = """
+    create table if not exists itemRatings(
+        row integer primary key autoincrement,
+        user varchar(25) not null,
+        rating decimal(2,1),
+        itemID varchar(25) not null
+    )
+    """
+    drop = "drop table if exists itemRatings"
 
-def insert(data):
-    insert = """
-    insert into petSupplies (user,rating,itemID) values
-    {}
-    """.format(",".join([str(i) for i in data]))
-    return insert
+    def insert(data):
+        insert = """
+        insert into itemRatings (user,rating,itemID) values
+        {}
+        """.format(",".join(tuple(str(i) for i in data)))
+        #print(insert[:200])
+        return insert
 
-load = []
-cur.execute(drop)
-cur.execute(create)
-con.commit()
-while True:
-    # Get next line from file
+    load = []
+    #possibly execute drop table here to reset tablespace
+    cur.execute(drop)
+    cur.execute(create)
+    con.commit()
     line = f.readline()
-    try:
-        j = json.loads(line)
-        data = (j["reviewerID"],j["overall"],j["asin"])
-        load.append(data)
-    except:
-        print("failed to read")
-    if len(load) > 10000:
+    while line:
+        # Get next line from file https://www.geeksforgeeks.org/read-a-file-line-by-line-in-python/
+        line = f.readline()
+        try:
+            j = json.loads(line)
+            data = []
+            for key in keys:
+                data.append(j[key])
+            load.append(tuple(data))
+        except:
+            print("failed to read")
+        if len(load) > 10000:
+           # print("load inserted")
+            cur.execute(insert(load))
+            con.commit()
+            load = []
+        # if line is empty
+        # end of file is reached
+        if not line:
+            break
+        #print(line)
+    if len(load):
         print("load inserted")
         cur.execute(insert(load))
         con.commit()
         load = []
-    # if line is empty
-    # end of file is reached
-    if not line:
-        break
-    #print(line)
-if len(load):
-    print("load inserted")
-    cur.execute(insert(load))
-    con.commit()
-    load = []
-f.close()
-print("done")
+    f.close()
+    print("done")
 
 # data = ((1,2,3),(1,2,3),(1,2,3))
 # print(insert(data))
+dbName = 'movies.db'
+inputFile = 'Movies_and_TV_5.json'
+convert(dbName,inputFile,("reviewerID","overall","asin"))

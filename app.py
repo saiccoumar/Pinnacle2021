@@ -4,6 +4,7 @@ from datetime import timedelta
 import sqlite3
 import utils
 import numpy
+import itertools
 
 statDir = './static/'
 templateDir = './templates/'
@@ -38,6 +39,12 @@ def connect(db = 'amazon.db'):
 @app.route('/')
 def index():
     return render_template("home.html")
+
+@app.route("/autocomplete/<term>")
+def autocomplete(term):
+    con = sqlite3.connect('./animeInfo.sqlite3')
+    cur = con.cursor()
+    return utils.autocomplete(cur,term)
 
 @app.route("/query",methods =['POST','GET'])
 def start():
