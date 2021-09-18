@@ -1,5 +1,5 @@
+// Keep searh bar at top
 $(window).scroll(function(e){
-    // Keep searh bar at top
     var isPositionFixed = ($('.search').css('position') == 'fixed');
     var triggerHeight = $('.landing').height();
     var paddingHeight = $('.search').height();
@@ -14,11 +14,25 @@ $(window).scroll(function(e){
     } 
 });
 
+// Update rating number
 function updateRateNum(val) {
     $('#ratingNum').html(val);
 }
 
+// Dropdown fill search on click
+function fillSearch(val) {
+    $('#search').val(val);
+}
+
+// Window loads
 $(function() {
+    // DBZ Easter Egg
+    $('#easterEgg').on({
+        click: function() {
+            $('#easterEgg').hide();
+            $('#dbz').show();
+        }
+    });
 
     // Add data entry modal
     var addModal = new bootstrap.Modal($('#addModal'));
@@ -49,19 +63,38 @@ $(function() {
         }
     })
     
-    /*
-    $('#guess').on('input', function() {
-        if ($('#guess').val()) {
-            //prevents empty query to sqlite
-            $.get("/autocomplete/" + $('#guess').val(), function(data) { //sends GET request to server returning {'data':[...]}
-                var results = "";
-                data['data'].forEach((result) => { results += <div class="result">
-            <p>${result}</p></div>; }); //inserts div for each matching anime from database
-                $('.search-results').html(results); //updates html
-                $('.search-results').show(); //shows if it is hidden
+    // Search autocomplete
+    $('#search').on('input', function() {
+        if ($('#search').val()) {
+            $('.searchDrop').html('<span class="d-block pt-1 pb-1">Searching suggestions...</span>');
+            // Prevent empty query to SQLite
+            $.get('/autocomplete/' + $('#search').val(), function(data) { // Sends GET request to server returning {'data':[...]}
+                var results = '';
+                data['data'].forEach((result) => {
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch('+result+')">'+result+'</span>';
+                });
+
+                // Blank if results match to avoid empty dropdown
+                if(results === '') {
+                    $('.searchDrop').hide();
+                } else {
+                    $('.searchDrop').html(results);
+                    $('.searchDrop').show();
+                }
             });
         } else {
-            $('.search-results').hide(); //if empty query, hide search results just in case
+            // Empty search
+            $('.searchDrop').html('<span class="d-block pt-1 pb-1">Start typing!</span>');
         }
-    }); */
+    });
+
+    // Focus dropdown visibility
+    $('#search').focusout(function() {
+        setTimeout(function() {
+            $('.searchDrop').hide();
+        }, 250)
+    })
+    $('#search').focusin(function() {
+        $('.searchDrop').show();
+    })
 });

@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>The Recommender</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#ffbd95">
+        
+        <title>dAURA</title>
 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.svg') }}">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#ffbd95">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     </head>
     <body>
         <div class="landing">
             <div class="d-flex">
                 <div class="container">
                     <div class="text-center pt-5 pb-5">
-                        <i class="fas fa-clipboard fa-5x pb-3"></i>
-                        <h2 class="text-center">The Recommender</h2>
-                        <p class="opacity-50">Singular Value Decomposition</p>
+                        <i id="easterEgg" class="fas fa-dragon fa-5x pb-3"></i>
+                        <img src="{{ url_for('static', filename='dbz.png') }}" id="dbz">
+                        <h2 class="text-center">dAURA</h2>
+                        <p class="opacity-50">Application of AURA</p>
                         <!-- <p class="opacity-50">Using Stochastic Gradient Descent (SGD)</p> -->
                     </div>
                 </div>
@@ -31,7 +33,12 @@
                 <div class="container">
                     <div class="text-center pt-3 pb-3">
                         <form class="w-50 d-inline-flex">
-                            <input type="text" class="form-control roundInput" placeholder="Where to start recommendation?">
+                            <div class="d-flex flex-column w-100">
+                                <input type="text" id="search" class="form-control roundInput" placeholder="What to recommend from?">
+                                <div class="searchDrop text-start">
+                                    <span class="d-block pt-1 pb-1">Start typing!</span>
+                                </div>
+                            </div>
                         </form>
                         <a href="javascript:{}" id="searchBtn" class="p-3"><i class="fas fa-search"></i></a>
                         <a href="javascript:{}" id="addBtn" class="p-3"><i class="fas fa-plus"></i><span id="addTxt"> Add Data</span></a>
@@ -96,7 +103,7 @@
             <div class="d-flex">
                 <div class="container">
                     <div class="pt-5 pb-5">
-                        <p class="opacity-75"><a href="https://github.com/saiccoumar/Pinnacle2021"><i class="fab fa-github"></i></a></p>
+                        <p class="opacity-75"><a href="https://github.com/saiccoumar/Pinnacle2021"><i class="fab fa-github fa-2x"></i></a></p>
                         <p class="opacity-75">Albert Lua, Sai Coumar, Jason Leong, Daniel Trager</p>
                         <p class="opacity-75">Project for <a href="https://pinnacle.us.org/">Pinnacle 2021</a></p>
                     </div>

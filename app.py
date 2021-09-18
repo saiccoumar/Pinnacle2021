@@ -12,8 +12,10 @@ templateDir = './templates/'
 app = Flask(__name__,static_folder=statDir,
             template_folder=templateDir)
 
-def connect(db = 'amazon.db'):
-    con = sqlite3.connect('amazon.db')
+dbFile = 'movies.db'
+
+def connect(db = dbFile):
+    con = sqlite3.connect(dbFile)
     class myCorr:
         def __init__(self):
             self.count = 0
@@ -42,9 +44,9 @@ def index():
 
 @app.route("/autocomplete/<term>")
 def autocomplete(term):
-    con = sqlite3.connect('./animeInfo.sqlite3')
+    con = sqlite3.connect(dbFile)
     cur = con.cursor()
-    return utils.autocomplete(cur,term)
+    return utils.autocomplete(con,term)
 
 @app.route("/query",methods =['POST','GET'])
 def start():
