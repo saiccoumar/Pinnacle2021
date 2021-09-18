@@ -13,9 +13,7 @@ def calcCorrelations(cur,item,threshold):
 
 def autocomplete(con,string):
     con.create_collation("edits", collation(string).collate)
-    titles = con.execute("select itemId from itemInfo order by collate").fetchall()
-    check = lambda x: (x[0],) if x[0]==x[1] else x
-    titles = list(map(check,titles))
+    titles = con.execute("select itemId from itemInfo order by itemId collate edits desc limit 5").fetchall()
     print(titles[:5])
     titlesSingle = itertools.chain.from_iterable(titles)
     

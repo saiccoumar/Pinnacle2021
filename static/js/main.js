@@ -56,19 +56,21 @@ $(function() {
         }
     })
     
-    /*
-    $('#guess').on('input', function() {
-        if ($('#guess').val()) {
+    // Search autocomplete
+    $('#search').on('input', function() {
+        console
+        if ($('#search').val()) {
             //prevents empty query to sqlite
-            $.get("/autocomplete/" + $('#guess').val(), function(data) { //sends GET request to server returning {'data':[...]}
-                var results = "";
-                data['data'].forEach((result) => { results += <div class="result">
-            <p>${result}</p></div>; }); //inserts div for each matching anime from database
+            $.get('/autocomplete/' + $('#search').val(), function(data) { //sends GET request to server returning {'data':[...]}
+                var results = '';
+                data['data'].forEach((result) => { results += '${result}'; }); 
+                console.log(data);
+                
                 $('.search-results').html(results); //updates html
                 $('.search-results').show(); //shows if it is hidden
             });
         } else {
             $('.search-results').hide(); //if empty query, hide search results just in case
         }
-    }); */
+    });
 });
