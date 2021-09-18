@@ -48,7 +48,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-
+                        <form>
+                            <input type="text" class="form-control roundInput mb-3" placeholder="Name">
+                            <input type="text" class="form-control roundInput mb-3" placeholder="Product">
+                            <label for="rating" class="form-label">Rating <span class="opacity-50"><span id="ratingNum">5</span>/10</span></label>
+                            <input type="range" class="form-range" min="0" max="10" id="rating" onchange="updateRateNum(this.value);">
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary">Add Entry</button>
