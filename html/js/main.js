@@ -1,3 +1,23 @@
+$(window).scroll(function(e){
+    // Keep searh bar at top
+    var isPositionFixed = ($('.search').css('position') == 'fixed');
+    var triggerHeight = $('.landing').height();
+    var paddingHeight = $('.search').height();
+
+    if ($(this).scrollTop() > triggerHeight && !isPositionFixed){ 
+        $('.search').css({'position': 'fixed', 'top': '0px'});
+        $('.stickyAdjust').css({'padding-top': paddingHeight});
+    }
+    if ($(this).scrollTop() < triggerHeight && isPositionFixed){
+        $('.search').css({'position': 'static', 'top': '0px'}); 
+        $('.stickyAdjust').css({'padding-top': '0px'});
+    } 
+});
+
+function updateRateNum(val) {
+    $('#ratingNum').html(val);
+}
+
 $(function() {
 
     // Add data entry modal

@@ -48,7 +48,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-
+                        <form>
+                            <input type="text" class="form-control roundInput mb-3" placeholder="Name">
+                            <input type="text" class="form-control roundInput mb-3" placeholder="Product">
+                            <label for="rating" class="form-label">Rating <span class="opacity-50"><span id="ratingNum">5</span>/10</span></label>
+                            <input type="range" class="form-range" min="0" max="10" id="rating" onchange="updateRateNum(this.value);">
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary">Add Entry</button>
@@ -56,6 +61,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="stickyAdjust"></div>
 
         <div class="results">
             <div class="d-flex">
@@ -89,6 +96,7 @@
             <div class="d-flex">
                 <div class="container">
                     <div class="pt-5 pb-5">
+                        <p class="opacity-75"><a href="https://github.com/saiccoumar/Pinnacle2021"><i class="fab fa-github"></i></a></p>
                         <p class="opacity-75">Albert Lua, Sai Coumar, Jason Leong, Daniel Trager</p>
                         <p class="opacity-75">Project for <a href="https://pinnacle.us.org/">Pinnacle 2021</a></p>
                     </div>

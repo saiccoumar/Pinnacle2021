@@ -56,6 +56,8 @@ a:hover {
 /* Search */
 .search {
     background-color: #000;
+    position: static;
+    width: 100%;
 }
 /* #searchTxt, #addTxt {
     display: none;
@@ -77,6 +79,7 @@ a:hover {
     padding-left: 15px;
     padding-right: 15px;
 }
+
 
 /* Results */
 .results {
