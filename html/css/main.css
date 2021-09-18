@@ -20,6 +20,10 @@
     100% {opacity:1;}
 }
 
+body {
+    background-color: #202020;
+}
+
 /* Link Hover Animations */
 a {
     color: #ff8040;
@@ -53,7 +57,7 @@ a:hover {
 .search {
     background-color: #000;
 }
-#searchTxt, #addTxt {
+/* #searchTxt, #addTxt {
     display: none;
     -webkit-animation: fadeIn .15s;
     -moz-animation: fadeIn .15s;
@@ -64,8 +68,28 @@ a:hover {
 #addBtn:hover #addTxt {
     display: inline;
     padding-right: 10px;
+} */
+#addBtn:hover, #searchBtn:hover {
+    color: #fff;
 }
-#searchBtn:hover #searchTxt {
-    display: inline;
-    padding-right: 10px;
+.roundInput {
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Results */
+.results {
+    background-color: #fff;
+}
+
+/* About */
+.about {
+    background-color: #fff;
+}
+
+/* Footer */
+.footer {
+    background-color: #202020;
+    color: #cfcfcf;
 }

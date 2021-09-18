@@ -1,0 +1,107 @@
+[
+    {
+        "correlation": 1.0,
+        "frequency": 2,
+        "productID": 123
+    },
+    {
+        "correlation": 9,
+        "frequency": 3,
+        "productID": 132134
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 3,
+        "frequency": 123,
+        "productID": 13223132
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    },
+    {
+        "correlation": 0.9,
+        "frequency": 13,
+        "productID": 349282
+    }
+]

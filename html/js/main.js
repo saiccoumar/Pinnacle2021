@@ -1,15 +1,21 @@
 $(function() {
-    // $('#searchTxt').hide();
 
-    // $('#searchBtn').on({
-    //     mouseenter: function() {
-    //         $('#searchTxt').fadeIn();
-    //         $('#addBtn').fadeOut();
-    //     }, mouseleave: function() {
-    //         $('#searchTxt').fadeOut();
-    //         $('#addBtn').fadeIn();
-    //     }, click: function() {
-    //         console.log('whoo');
-    //     }
-    // });
+    // Add data entry modal
+    var addModal = new bootstrap.Modal($('#addModal'));
+    $('#addBtn').on({
+        click: function() {
+            addModal.show();
+        }
+    });
+
+    // Fetch JSON
+    $.getJSON('test.json', function(data) {
+        var item = '';
+
+        // Go through JSON
+        $.each(data, function(key, value) {
+            item += '<tr><td>'+value.correlation+'</td><td>'+value.frequency+'</td><td>'+value.productID+'</td>';
+        })
+        $('#dataResult').append(item)
+    })
 });
