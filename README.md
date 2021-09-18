@@ -1,5 +1,5 @@
-# Pinnacle 2021
-Team HackDuke (PMOI) project for Pinnacle 2021.
+# Pinnacle 2021 - Project AURA
+AURA, Adaptive User Recommendation Algorithm, is a recommendation engine. The algorithms used are the Pearson and FUNK SVD.
 
 ### Team Members
 Albert Lua, Sai Coumar, Jason Leong, Daniel Trager
@@ -32,7 +32,7 @@ pinnacle\Scripts\activate.bat
 Verify `(pinnacle)` is present in the beginning of the line for terminal. Now in the virtual environment, install the requirements via pip.
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Now we can run the Flask application.
