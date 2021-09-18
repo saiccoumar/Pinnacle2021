@@ -12,18 +12,33 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
 
 Verification can be done with the following, ensure "RemoteSigned" is returned.
-```Get-ExecutionPolicy```
+
+``
+`Get-ExecutionPolicy
+```
 
 Now the virtual environment needs to be setup (we will be using "pinnacle" as the name).
-```python -m venv pinnacle```
+
+```
+python -m venv pinnacle
+```
 
 Virtual environment needs to be activated. For PowerShell, remove the .bat extension.
-```pinnacle\Scripts\activate.bat```
+
+```
+pinnacle\Scripts\activate.bat
+```
 
 Verify `(pinnacle)` is present in the beginning of the line for terminal. Now in the virtual environment, install the requirements via pip.
-```pip install requirements.txt```
+
+```
+pip install requirements.txt
+```
 
 Now we can run the Flask application.
-```python app.py```
+
+```
+python app.py
+```
 
 Application should now be running and accessible via localhost. Default is `127.0.0.1:5000`
