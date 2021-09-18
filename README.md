@@ -6,7 +6,10 @@ Albert Lua, Sai Coumar, Jason Leong, Daniel Trager
 
 ### Initial Setup
 First, the Execution Policy for PowerShell needs to be changed. The following command needs to be run in PowerShell (admin).
-```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
+
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+```
 
 Verification can be done with the following, ensure "RemoteSigned" is returned.
 ```Get-ExecutionPolicy```
