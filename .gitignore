@@ -1,6 +1,5 @@
 **/pinnacle
 *.ipynb
-pet
-
 *.sqlite3
 *.db
+*.pyc
