@@ -13,8 +13,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 Verification can be done with the following, ensure "RemoteSigned" is returned.
 
-``
-`Get-ExecutionPolicy
+```Get-ExecutionPolicy
 ```
 
 Now the virtual environment needs to be setup (we will be using "pinnacle" as the name).
