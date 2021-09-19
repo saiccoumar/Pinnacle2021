@@ -96,7 +96,7 @@ $(function() {
         if ($('#enterSVD').val()) {
             $('.searchDropSVD').html('<span class="d-block pt-1 pb-1">Searching suggestions...</span>');
             // Prevent empty query to SQLite
-            $.get('/autocomplete/' + $('#enterSVD').val(), function(data) { // Sends GET request to server returning {'data':[...]}
+            $.get('/autocompleteLIM/' + $('#enterSVD').val(), function(data) { // Sends GET request to server returning {'data':[...]}
                 var results = '';
                 data['data'].forEach((result) => {
                     results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="enterSVDData(\''+result.toString()+'\')">'+result.toString()+'</span>';

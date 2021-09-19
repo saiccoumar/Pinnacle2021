@@ -25,6 +25,18 @@ def autocomplete(con,string):
     
     return {'data':list(titlesSingle)[:5]}
 
+# Limited to first 10000 due to inefficiency constraints of the SVD algorithm
+def autocompleteLIM(con,string):
+    con.create_collation("edits", collation(string).collate)
+    if len(string)<100:
+        titles = con.execute(f"select name from itemInfo where name like '%{string}%' and itemID in (select distinct itemID from itemRatings where row < 10000)").fetchall()
+    else:
+        #titles = con.execute(f"select name from itemInfo order by name collate edits desc limit 5").fetchall()
+        titles = con.execute(f"select name from itemInfo where row < 100000 and name like '%{string}%' limit 5").fetchall()
+    print(titles[:5])
+    titlesSingle = itertools.chain.from_iterable(titles)
+    
+    return {'data':list(titlesSingle)[:5]}
 
 def editDistDP(str1, str2):
     m = len(str1)

@@ -55,6 +55,12 @@ def autocomplete(term):
     cur = con.cursor()
     return utils.autocomplete(con,term)
 
+@app.route("/autocompleteLIM/<term>")
+def autocompleteLIM(term):
+    con = sqlite3.connect(dbFile)
+    cur = con.cursor()
+    return utils.autocompleteLIM(con,term)
+
 @app.route("/queryPearson/<search>", methods=["GET"])
 def start(search):
     con = connect()

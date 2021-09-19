@@ -33,7 +33,6 @@ def predict_rating(user_mat, movie_mat, user_id, movie_id,data):
     print(pred)
     user_row = 568
     print(movie_id)
-    movie_col = int(movie_id)
     print(float(pred[user_row,movie_col]))
     print(type(float(pred[user_row,movie_col])))
     return float(pred[user_row,movie_col])
