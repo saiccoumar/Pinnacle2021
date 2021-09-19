@@ -66,18 +66,18 @@ def start(search):
 @app.route("/querySVD/<search>", methods=["GET"])
 def svdStart(search):
     con = connect()
-    
+    item = con.execute(f"select itemID from itemInfo where name='{search}'").fetchone()[0]
     global cached_results
     if cached_results:
         [p,q,data,dataDF] = cached_results
-        prediction = svd4.predict_rating(p,q,1,search,dataDF) #TODO change 1 to random user
+        prediction = svd4.predict_rating(p,q,1,item,dataDF) #TODO change 1 to random user
     # returns recomendations in JSON form
         return {"prediction":prediction}
     else:
         p,q,data,dataDF = svd4.SVD(1)
         p,q= svd4.SVDUpgrade(data, 1,p,q)
         cached_results= [p,q,data,dataDF]
-        prediction = svd4.predict_rating(p,q,1,search,dataDF) #TODO change 1 to random user
+        prediction = svd4.predict_rating(p,q,1,item,dataDF) #TODO change 1 to random user
     # returns recomendations in JSON form
         return {"prediction":prediction}
     

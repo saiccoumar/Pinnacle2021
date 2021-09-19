@@ -54,7 +54,12 @@
 
                         <div class="svd">
                             <form class="w-50 d-inline-flex" id="enterDataSVD">
-                                <input type="text" id="enterSVD" class="form-control roundInput" placeholder="What to calculate?">
+                                <div class="d-flex flex-column w-100">
+                                    <input type="text" id="enterSVD" class="form-control roundInput" placeholder="What to calculate?">
+                                    <div class="searchDropSVD text-start">
+                                        <span class="d-block pt-1 pb-1">Must enter exact search query!</span>
+                                    </div>
+                                </div>
                             </form>
                             <a href="javascript:{}" id="enterBtn" class="p-3" onclick="$('#enterDataSVD').submit()"><i class="fas fa-sign-in-alt"></i></a>
                         </div>

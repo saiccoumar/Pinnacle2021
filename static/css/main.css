@@ -131,7 +131,7 @@ input:checked + .slider:before {
     padding-left: 15px;
     padding-right: 15px;
 }
-.searchDrop {
+.searchDrop, .searchDropSVD {
     display: none;
     position: absolute;
     margin-top: 38px;

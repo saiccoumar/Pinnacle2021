@@ -14,15 +14,16 @@ $(window).scroll(function(e){
     } 
 });
 
-// Update rating number
-function updateRateNum(val) {
-    $('#ratingNum').html(val);
-}
-
 // Dropdown fill search on click
 function fillSearch(val) {
     $('#search').val(val);
     $('#searchFormPearson').submit();
+}
+
+// Dropdown enter data for SVD on click
+function enterSVDData(val) {
+    $('#enterSVD').val(val);
+    $('#enterDataSVD').submit();
 }
 
 // Window loads
@@ -73,7 +74,7 @@ $(function() {
             $.get('/autocomplete/' + $('#search').val(), function(data) { // Sends GET request to server returning {'data':[...]}
                 var results = '';
                 data['data'].forEach((result) => {
-                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch(\''+result.toString()+'\')">'+result.toString()+'</span>';
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="enterSVDData(\''+result.toString()+'\')">'+result.toString()+'</span>';
                 });
 
                 // Blank if results match to avoid empty dropdown
@@ -90,6 +91,31 @@ $(function() {
         }
     });
 
+    // Enter SVD autocomplete
+    $('#enterSVD').on('input', function() {
+        if ($('#enterSVD').val()) {
+            $('.searchDropSVD').html('<span class="d-block pt-1 pb-1">Searching suggestions...</span>');
+            // Prevent empty query to SQLite
+            $.get('/autocomplete/' + $('#enterSVD').val(), function(data) { // Sends GET request to server returning {'data':[...]}
+                var results = '';
+                data['data'].forEach((result) => {
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="enterSVDData(\''+result.toString()+'\')">'+result.toString()+'</span>';
+                });
+
+                // Blank if results match to avoid empty dropdown
+                if(results === '') {
+                    $('.searchDropSVD').fadeOut();
+                } else {
+                    $('.searchDropSVD').html(results);
+                    $('.searchDropSVD').fadeIn();
+                }
+            });
+        } else {
+            // Empty search
+            $('.searchDropSVD').html('<span class="d-block pt-1 pb-1">Must enter exact search query!</span>');
+        }
+    });
+
     // Focus dropdown visibility
     $('#search').focusout(function() {
         setTimeout(function() {
@@ -98,6 +124,16 @@ $(function() {
     })
     $('#search').focusin(function() {
         $('.searchDrop').fadeIn();
+    })
+
+    // Enter SVD focus dropdown visibility
+    $('#enterSVD').focusout(function() {
+        setTimeout(function() {
+            $('.searchDropSVD').fadeOut();
+        }, 50)
+    })
+    $('#enterSVD').focusin(function() {
+        $('.searchDropSVD').fadeIn();
     })
 
     // Search Pearson form AJAX submission
