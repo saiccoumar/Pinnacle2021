@@ -1,7 +1,8 @@
 import itertools
 
 def calcCorrelations(cur,item,threshold):
-    item = cur.execute(f"select itemID from itemInfo where name={item}").fetchone()
+    item = cur.execute(f"select itemID from itemInfo where name='{item}'").fetchone()[0]
+    print(item)
     small = f"""select name,correlation,occurances from
     (select corr(rating1,rating2) correlation,itemID2,itemID1 from 
     ((select itemID as itemID2,user as user2,rating as rating2  from itemRatings where itemID = "{item}") 
@@ -14,10 +15,11 @@ def calcCorrelations(cur,item,threshold):
 
 def autocomplete(con,string):
     con.create_collation("edits", collation(string).collate)
-    if len(string)<8:
-        titles = con.execute(f"select name from itemInfo where name like '%{string}%' order by name collate edits desc limit 5").fetchall()
+    if len(string)<100:
+        titles = con.execute(f"select name from itemInfo where name like '%{string}%' limit 5").fetchall()
     else:
-        titles = con.execute(f"select name from itemInfo order by name collate edits desc limit 5").fetchall()
+        #titles = con.execute(f"select name from itemInfo order by name collate edits desc limit 5").fetchall()
+        titles = con.execute(f"select name from itemInfo where name like '%{string}%' limit 5").fetchall()
     print(titles[:5])
     titlesSingle = itertools.chain.from_iterable(titles)
     

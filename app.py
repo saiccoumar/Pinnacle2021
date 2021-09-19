@@ -73,7 +73,7 @@ def start(search):
     con = connect()
     cur = con.cursor()
     #returns recomendations in JSON form
-    recs = utils.formatCorrelations(utils.calcCorrelations(cur,search,1000))
+    recs = utils.formatCorrelations(utils.calcCorrelations(cur,search,15000))
     return recs
 
 @app.route("/querySVD/<search>", methods=["GET"])

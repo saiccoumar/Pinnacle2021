@@ -22,7 +22,7 @@ function updateRateNum(val) {
 // Dropdown fill search on click
 function fillSearch(val) {
     $('#search').val(val);
-    $('#searchFormPearson').submit()
+    $('#searchFormPearson').submit();
 }
 
 // Window loads
@@ -65,12 +65,6 @@ $(function() {
         }
     });
 
-    // Rating range update
-    $('#rating').on('input', function() {
-        val = 
-        $('#ratingNum').html($('#rating').val());
-    })
-    
     // Search autocomplete
     $('#search').on('input', function() {
         if ($('#search').val()) {
@@ -79,7 +73,7 @@ $(function() {
             $.get('/autocomplete/' + $('#search').val(), function(data) { // Sends GET request to server returning {'data':[...]}
                 var results = '';
                 data['data'].forEach((result) => {
-                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch(\''+result+'\')">'+result+'</span>';
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch(\''+result.toString()+'\')">'+result.toString()+'</span>';
                 });
 
                 // Blank if results match to avoid empty dropdown
@@ -100,13 +94,31 @@ $(function() {
     $('#search').focusout(function() {
         setTimeout(function() {
             $('.searchDrop').fadeOut();
-        }, 250)
+        }, 50)
     })
     $('#search').focusin(function() {
         $('.searchDrop').fadeIn();
     })
 
     // Search Pearson form AJAX submission
+    $('#searchFormPearson').submit(function(event) {
+        // Prevent normal submission
+        event.preventDefault();
+
+        $.get('/queryPearson/'+$('#search').val(), function(data) {
+            $('#dataResult').html('');
+            console.log(data);
+            var item = '';
+
+            // Go through JSON
+            $.each(data.items, function(key, value) {
+                item += '<tr><td>'+value.productID+'</td><td>'+value.frequency+'</td><td>'+value.correlation+'</td>';
+            })
+            $('#dataResult').append(item)
+        })
+    });
+
+    // SVD enter data AJAX submission
     $('#enterDataSVD').submit(function(event) {
         // Prevent normal submission
         event.preventDefault();
@@ -119,11 +131,9 @@ $(function() {
             // Go through JSON
             $.each(data.items, function(key, value) {
                 item += '<div class="col text-center"><p>User ID: '+value.userID+'</p><h1>'+value.affinity+'</h1><p class="opacity-50">Affinity Score</p></div>';
+                console.log(item);
             })
             $('#svdResults').append(item)
         })
     });
-
-    // SVD enter data AJAX submission
-
 });
