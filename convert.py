@@ -1,9 +1,9 @@
 import sqlite3
 import json
-
+import csv
 
 #example call: convert("amazon.db","Movies_and_TV_5.json",("id","asin","overall"))
-def convert(db,inputFile,keys):
+def convertJSON(db,inputFile,keys):
     con=sqlite3.connect(db)
     cur = con.cursor()
     f = open(inputFile)
@@ -60,6 +60,54 @@ def convert(db,inputFile,keys):
         load = []
     f.close()
     print("done")
+    con.close()
+
+def convertCSV(db,inputFile,keys): #keys are the indexes of each row you want to accept
+    con=sqlite3.connect(db)
+    cur = con.cursor()
+    f = open(inputFile)
+
+    create = """
+    create table if not exists itemRatings(
+        row integer primary key autoincrement,
+        user varchar(25) not null,
+        rating decimal(2,1),
+        itemID varchar(25) not null
+    )
+    """
+    drop = "drop table if exists itemRatings"
+
+    def insert(data1):
+        insert = """
+        insert into itemRatings (user,rating,itemID) values
+        {}
+        """.format(",".join(tuple(str(i) for i in data1)))
+        #print(insert[:200])
+        return insert
+
+    load = []
+    #possibly execute drop table here to reset tablespace
+    cur.execute(drop)
+    cur.execute(create)
+    con.commit()
+    reader = csv.reader(f)
+    headers = next(reader)
+    data = []
+    print(headers)
+    
+    for row in reader:
+        load = [row[i] for i in keys]
+        data.append(tuple(load))
+        if len(data) > 1000000:
+            print(load)
+           # print("load inserted")
+            cur.execute(insert(tuple(data)))
+            con.commit()
+            data = []
+    cur.execute(insert(data))
+    con.commit()
+    con.close()
+
 
 
 dbName = 'movies.db'
