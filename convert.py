@@ -61,8 +61,7 @@ def convert(db,inputFile,keys):
     f.close()
     print("done")
 
-# data = ((1,2,3),(1,2,3),(1,2,3))
-# print(insert(data))
+
 dbName = 'movies.db'
 inputFile = 'Movies_and_TV_5.json'
-convert(dbName,inputFile,("reviewerID","overall","asin"))
+# EXAMPLE CALL convert(dbName,inputFile,("reviewerID","overall","asin"))

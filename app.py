@@ -48,17 +48,13 @@ def autocomplete(term):
     cur = con.cursor()
     return utils.autocomplete(con,term)
 
-@app.route("/query",methods =['POST','GET'])
-def start():
-    if request.method == 'POST':
-        product = request.form["product"]
+@app.route("/query/<search>",method = "GET")
+def start(search):
         con = connect()
         cur = con.cursor()
         #returns recomendations in JSON form
-        recs = utils.formatCorrelations(utils.calcCorrelations(cur,product,10))
+        recs = utils.formatCorrelations(utils.calcCorrelations(cur,search,10))
         return recs
-    else:
-        return "do not use get"
 
 @app.after_request
 def after_request(response):
