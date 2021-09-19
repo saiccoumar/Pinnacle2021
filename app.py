@@ -43,20 +43,7 @@ def connect(db = dbFile):
     con.create_aggregate("corr", 2, myCorr)
     return con
 
-def predict_rating(user_mat, movie_mat, user_id, movie_id,data):
-    
-    # Use the training data to create a series of users and movies that matches the ordering in training data
-    user_ids_series = np.array(data.index)
-    movie_ids_series = np.array(data.columns)
-    
-    # User row and Movie Column
-    user_row = np.where(user_ids_series == user_id)[0][0]
-    movie_col = np.where(movie_ids_series == movie_id)[0][0]
-    
-    # Take dot product of that row and column in U and V to make prediction
-    pred = np.dot(user_mat[user_row, :], movie_mat[:, movie_col])
-    
-    return pred
+
 
 @app.route('/')
 def index():
@@ -79,17 +66,22 @@ def start(search):
 @app.route("/querySVD/<search>", methods=["GET"])
 def svdStart(search):
     con = connect()
+    
     global cached_results
     if cached_results:
         [p,q,data,dataDF] = cached_results
+        prediction = svd4.predict_rating(p,q,1,3448,dataDF) #TODO change 1 to random user
+    # returns recomendations in JSON form
+        return {"prediction":prediction}
     else:
-        p,q,data,dataDF = svd4.SVD(1,con)
+        p,q,data,dataDF = svd4.SVD(1)
         p,q= svd4.SVDUpgrade(data, 1,p,q)
         cached_results= [p,q,data,dataDF]
-    
-    prediction = predict_rating(p,q,1,3448,dataDF) #TODO change 1 to random user
+        prediction = svd4.predict_rating(p,q,1,3448,dataDF) #TODO change 1 to random user
     # returns recomendations in JSON form
-    return {"prediction":prediction}
+        return {"prediction":prediction}
+    
+    
     # Temporary format of JSON
     # return {"items": [
     #     {

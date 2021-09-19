@@ -19,9 +19,23 @@ def predict_rating(user_mat, movie_mat, user_id, movie_id,data):
     movie_col = np.where(movie_ids_series == movie_id)[0]
     
     # Take dot product of that row and column in U and V to make prediction
-    pred = np.dot(user_mat[user_row, :], movie_mat[:, movie_col])
     
-    return pred
+    pred = np.dot(user_mat, movie_mat)
+    print("USERS AND MOVIESs")
+    print(movie_ids_series)
+    print(user_ids_series)
+    # print(user_row)
+    # print(movie_col)
+
+
+    print("PRED")
+    print(pred.shape)
+    print(pred)
+    user_row = 568
+    movie_col = 10
+    print(float(pred[user_row,movie_col]))
+    print(type(float(pred[user_row,movie_col])))
+    return float(pred[user_row,movie_col])
 
 def SVD(epochs,learning_rate=0.01,latent_features=6,db="movies2.db"):
     con = sqlite3.connect(db)

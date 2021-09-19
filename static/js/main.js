@@ -136,8 +136,8 @@ $(function() {
             var item = '';
         
             // Go through JSON
-            $.each(data.items, function(key, value) {
-                item += '<div class="col text-center"><p>User ID: '+value.userID+'</p><h1>'+value.affinity+'</h1><p class="opacity-50">Affinity Score</p></div>';
+            $.each(data, function(key, value) {
+                item += '<div class="col text-center"><p>User ID: test</p><h1>'+value+'</h1><p class="opacity-50">Affinity Score</p></div>';
                 console.log(item);
             })
             $('#svdResults').append(item)
