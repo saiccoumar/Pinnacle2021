@@ -1,6 +1,6 @@
 **/pinnacle
-*.ipynb
 *.sqlite3
 *.db
 *.pyc
 ratings.csv
+.vscode/settings.json
