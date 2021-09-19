@@ -40,9 +40,9 @@ def validation_comparison(val_df, num_preds,user_mat,movie_mat,data):
         print (val_users[index],val_movies[index], val_ratings[index])
         pred = predict_rating(user_mat, movie_mat, val_users[index], val_movies[index],data)        
         print("The actual rating for user {} on movie {} is {}.\n While the predicted rating is {}.".format(val_users[index], val_movies[index], val_ratings[index], round(pred)))
-        print("The RMSE for is {}",rmse(val_ratings[index],pred))
+        # print("The RMSE for is {}",rmse(val_ratings[index],pr gted))
 
-
+    
 names = ['userId', 'movieId', 'rating', 'timestamp']
 data = pd.read_csv('ml-100k/u.data', '\t', names=names,
                        engine='python')
@@ -61,13 +61,21 @@ data['movieId'] = data['movieId'].astype('str')
 users = data['userId'].unique() 
 movies = data['movieId'].unique() 
 
-# print(data.shape[0]*0.9)
-training_df, validation_df,new_df = create_train_test(data,0.9)
-print("FLAG")
 print(data.shape)
-print(training_df.shape)
-print(validation_df.shape)
-print(new_df.shape)
+
+training_df, validation_df,new_df = create_train_test(data,0.9)
+# data5 = data
+print("DATA5")
+print(data5.shape)
+data5.pivot_table(index='userId', columns='movieId', values='rating',fill_value=0)
+print("TYPE")
+print(type(new_df))
+print(type(training_df))
+# print("FLAG")
+# print(data.shape)
+# print(training_df.shape)
+# print(validation_df.shape)
+# print(new_df.shape)
 
 print("Total Unique Users", len(users))
 # should be 943
@@ -89,7 +97,8 @@ print(data2.head())
 
 
 # NEW END
-
+print(data3.shape)
+print(data4.shape)
 data = data.to_numpy()
 data2 = data2.to_numpy()
 data3 = data3.to_numpy()
@@ -127,8 +136,8 @@ def SVD(epochs,learning_rate=0.01,latent_features=6, ):
         learning_rate = learning_rate/1.02
         print("%d \t\t %f" % (epoch+1, sse_accum / num_ratings))
     return(p,q)
-def SVDUpgrade(epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_features=6):
-
+def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_features=6):
+    data = d 
     p = user_matrix
     q = item_matrix
 
@@ -160,13 +169,14 @@ def SVDUpgrade(epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_fea
         learning_rate = learning_rate/1.02
         print("%d \t\t %f" % (epoch+1, sse_accum / num_ratings))
     return(p,q)
-# p,q=SVD(20)
-# p,q=SVDUpgrade(5,p,q)
-print(data.shape)
-print(data4.shape)
-data = data+data4
+p,q=SVD(20)
+
+p,q=SVDUpgrade(data5, 5,p,q)
+
+# print(data4)
+
 # p,q = SVDUpdate(p,q)
-print("RMSE: ")
+# print("RMSE: ")
 # print(p.dot(q)-data)
 # print(validation_comparison(validation_df,10,p,q,data3))
 # p,q=SVD(25)
