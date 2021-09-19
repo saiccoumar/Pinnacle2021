@@ -22,6 +22,7 @@ function updateRateNum(val) {
 // Dropdown fill search on click
 function fillSearch(val) {
     $('#search').val(val);
+    $('#searchForm').submit()
 }
 
 // Window loads
@@ -47,21 +48,6 @@ $(function() {
         val = 
         $('#ratingNum').html($('#rating').val());
     })
-
-    // Fetch JSON
-    // $('#searchBtn').on({
-    //     click: function() {
-    //         $.getJSON('test.json', function(data) {
-    //             var item = '';
-        
-    //             // Go through JSON
-    //             $.each(data.items, function(key, value) {
-    //                 item += '<tr><td>'+value.correlation+'</td><td>'+value.frequency+'</td><td>'+value.productID+'</td>';
-    //             })
-    //             $('#dataResult').append(item)
-    //         })
-    //     }
-    // })
     
     // Search autocomplete
     $('#search').on('input', function() {
@@ -104,6 +90,7 @@ $(function() {
         event.preventDefault();
 
         $.get('/query/'+$('#search').val(), function(data) {
+            $('#dataResult').html('');
             console.log(data);
             var item = '';
         
