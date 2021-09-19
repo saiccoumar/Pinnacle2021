@@ -22,7 +22,7 @@ function updateRateNum(val) {
 // Dropdown fill search on click
 function fillSearch(val) {
     $('#search').val(val);
-    $('#searchForm').submit()
+    $('#searchFormPearson').submit()
 }
 
 // Window loads
@@ -32,6 +32,28 @@ $(function() {
         click: function() {
             $('#easterEgg').hide();
             $('#dbz').show();
+        }
+    });
+
+    // Slider to toggle between modes
+    $('#toggleSVDTxt').css('opacity', 0.6);
+    $('#toggler').click(function() {
+        if($(this).prop('checked') == true) {
+            $('#togglePearsonTxt').css('opacity', 0.6);
+            $('#toggleSVDTxt').css('opacity', 1.0);
+            $('.landing').css('background-color', '#FFAD9B');
+            $('a').css('color', '#ff0000');
+            $('.search').css('background-color', '#6F1400');
+            $('.svd').show();
+            $('.pearson').hide();
+        } else if($(this).prop('checked') == false) {
+            $('#toggleSVDTxt').css('opacity', 0.6);
+            $('#togglePearsonTxt').css('opacity', 1.0);
+            $('.landing').css('background-color', '#ffbd95');
+            $('a').css('color', '#ff8040');
+            $('.search').css('background-color', '#623100');
+            $('.pearson').show();
+            $('.svd').hide();
         }
     });
 
@@ -62,30 +84,30 @@ $(function() {
 
                 // Blank if results match to avoid empty dropdown
                 if(results === '') {
-                    $('.searchDrop').hide();
+                    $('.searchDrop').fadeOut();
                 } else {
                     $('.searchDrop').html(results);
-                    $('.searchDrop').show();
+                    $('.searchDrop').fadeIn();
                 }
             });
         } else {
             // Empty search
-            $('.searchDrop').html('<span class="d-block pt-1 pb-1">Start typing!</span>');
+            $('.searchDrop').html('<span class="d-block pt-1 pb-1">Must enter exact search query!</span>');
         }
     });
 
     // Focus dropdown visibility
     $('#search').focusout(function() {
         setTimeout(function() {
-            $('.searchDrop').hide();
+            $('.searchDrop').fadeOut();
         }, 250)
     })
     $('#search').focusin(function() {
-        $('.searchDrop').show();
+        $('.searchDrop').fadeIn();
     })
 
     // Search form AJAX submission
-    $('#searchForm').submit(function(event) {
+    $('#searchFormPearson').submit(function(event) {
         // Prevent normal submission
         event.preventDefault();
 
