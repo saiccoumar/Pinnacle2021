@@ -167,7 +167,7 @@ $(function() {
         $('#svdMsg').html('<p class="text-center">Currently analyzing...</p>');
 
         $.get('/querySVD/'+$('#enterSVD').val(), function(data) {
-            $('#dataResult').html('');
+            $('#svdResults').html('');
             console.log(data);
             var item = '';
         
