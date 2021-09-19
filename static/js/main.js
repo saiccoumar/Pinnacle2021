@@ -49,19 +49,19 @@ $(function() {
     })
 
     // Fetch JSON
-    $('#searchBtn').on({
-        click: function() {
-            $.getJSON('test.json', function(data) {
-                var item = '';
+    // $('#searchBtn').on({
+    //     click: function() {
+    //         $.getJSON('test.json', function(data) {
+    //             var item = '';
         
-                // Go through JSON
-                $.each(data.items, function(key, value) {
-                    item += '<tr><td>'+value.correlation+'</td><td>'+value.frequency+'</td><td>'+value.productID+'</td>';
-                })
-                $('#dataResult').append(item)
-            })
-        }
-    })
+    //             // Go through JSON
+    //             $.each(data.items, function(key, value) {
+    //                 item += '<tr><td>'+value.correlation+'</td><td>'+value.frequency+'</td><td>'+value.productID+'</td>';
+    //             })
+    //             $('#dataResult').append(item)
+    //         })
+    //     }
+    // })
     
     // Search autocomplete
     $('#search').on('input', function() {
@@ -71,7 +71,7 @@ $(function() {
             $.get('/autocomplete/' + $('#search').val(), function(data) { // Sends GET request to server returning {'data':[...]}
                 var results = '';
                 data['data'].forEach((result) => {
-                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch('+result+')">'+result+'</span>';
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch(\''+result+'\')">'+result+'</span>';
                 });
 
                 // Blank if results match to avoid empty dropdown
@@ -97,4 +97,21 @@ $(function() {
     $('#search').focusin(function() {
         $('.searchDrop').show();
     })
+
+    // Search form AJAX submission
+    $('#searchForm').submit(function(event) {
+        // Prevent normal submission
+        event.preventDefault();
+
+        $.get('/query/'+$('#search').val(), function(data) {
+            console.log(data);
+            var item = '';
+        
+            // Go through JSON
+            $.each(data.items, function(key, value) {
+                item += '<tr><td>'+value.productID+'</td><td>'+value.frequency+'</td><td>'+value.correlation+'</td>';
+            })
+            $('#dataResult').append(item)
+        })
+    });
 });
