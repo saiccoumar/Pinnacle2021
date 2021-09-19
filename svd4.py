@@ -125,8 +125,8 @@ def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_f
         learning_rate = learning_rate/1.02
         print("%d \t\t %f" % (epoch+1, sse_accum / num_ratings))
     return(p,q)
-p,q,data,dataDF=SVD(4)
-p,q=SVDUpgrade(data, 3,p,q)
-print(predict_rating(p,q,1,3448,dataDF))
-print(predict_rating(p,q,1,2692,dataDF))
-print(predict_rating(p,q,1,2843,dataDF))
+# p,q,data,dataDF=SVD(4)
+# p,q=SVDUpgrade(data, 3,p,q)
+# print(predict_rating(p,q,1,3448,dataDF))
+# print(predict_rating(p,q,1,2692,dataDF))
+# print(predict_rating(p,q,1,2843,dataDF))

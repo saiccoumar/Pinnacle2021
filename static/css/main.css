@@ -166,6 +166,9 @@ input:checked + .slider:before {
 .svd {
     display: none;
 }
+.svdResults h1 {
+    font-size: 60px;
+}
 
 /* Footer */
 .footer {

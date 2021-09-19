@@ -19,8 +19,8 @@ templateDir = './templates/'
 app = Flask(__name__,static_folder=statDir,
             template_folder=templateDir)
 
-dbFile = 'movies.db'
-
+dbFile = 'movies2.db'
+cached_results = None
 def connect(db = dbFile):
     con = sqlite3.connect(dbFile)
     class myCorr:
@@ -73,17 +73,34 @@ def start(search):
     con = connect()
     cur = con.cursor()
     #returns recomendations in JSON form
-    recs = utils.formatCorrelations(utils.calcCorrelations(cur,search,10))
+    recs = utils.formatCorrelations(utils.calcCorrelations(cur,search,1000))
     return recs
 
 @app.route("/querySVD/<search>", methods=["GET"])
-def start(search):
+def svdStart(search):
     con = connect()
-    p,q,data,dataDF=svd4.SVD(4,con)
-    p,q= svd4.SVDUpgrade(data, 3,p,q)
+    global cached_results
+    if cached_results:
+        [p,q,data,dataDF] = cached_results
+    else:
+        p,q,data,dataDF = svd4.SVD(1,con)
+        p,q= svd4.SVDUpgrade(data, 1,p,q)
+        cached_results= [p,q,data,dataDF]
+    
     prediction = predict_rating(p,q,1,3448,dataDF) #TODO change 1 to random user
     #returns recomendations in JSON form
-    return {"prediction":prediction}
+    # return {"prediction":prediction}
+    # Temporary format of JSON
+    return {"items": [
+        {
+            "userID": 123,
+            "affinity": 4.7
+        },
+        {
+            "userID": 135,
+            "affinity": 9.8
+        }
+    ]}
 
 @app.after_request
 def after_request(response):

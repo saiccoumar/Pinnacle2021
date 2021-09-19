@@ -106,21 +106,24 @@ $(function() {
         $('.searchDrop').fadeIn();
     })
 
-    // Search form AJAX submission
-    $('#searchFormPearson').submit(function(event) {
+    // Search Pearson form AJAX submission
+    $('#enterDataSVD').submit(function(event) {
         // Prevent normal submission
         event.preventDefault();
 
-        $.get('/query/'+$('#search').val(), function(data) {
+        $.get('/querySVD/'+$('#search').val(), function(data) {
             $('#dataResult').html('');
             console.log(data);
             var item = '';
         
             // Go through JSON
             $.each(data.items, function(key, value) {
-                item += '<tr><td>'+value.productID+'</td><td>'+value.frequency+'</td><td>'+value.correlation+'</td>';
+                item += '<div class="col text-center"><p>User ID: '+value.userID+'</p><h1>'+value.affinity+'</h1><p class="opacity-50">Affinity Score</p></div>';
             })
-            $('#dataResult').append(item)
+            $('#svdResults').append(item)
         })
     });
+
+    // SVD enter data AJAX submission
+
 });
