@@ -74,7 +74,7 @@ $(function() {
             $.get('/autocomplete/' + $('#search').val(), function(data) { // Sends GET request to server returning {'data':[...]}
                 var results = '';
                 data['data'].forEach((result) => {
-                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="enterSVDData(\''+result.toString()+'\')">'+result.toString()+'</span>';
+                    results += '<span class="d-block pt-1 pb-1 searchDropItem" onclick="fillSearch(\''+result.toString()+'\')">'+result.toString()+'</span>';
                 });
 
                 // Blank if results match to avoid empty dropdown
