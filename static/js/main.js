@@ -105,6 +105,9 @@ $(function() {
         // Prevent normal submission
         event.preventDefault();
 
+        $('#dataResult').html('');
+        $('#dataMsg').html('<p class="text-center">Now searching...</p>');
+
         $.get('/queryPearson/'+$('#search').val(), function(data) {
             $('#dataResult').html('');
             console.log(data);
@@ -114,7 +117,8 @@ $(function() {
             $.each(data.items, function(key, value) {
                 item += '<tr><td>'+value.productID+'</td><td>'+value.frequency+'</td><td>'+value.correlation+'</td>';
             })
-            $('#dataResult').append(item)
+            $('#dataResult').append(item);
+            $('#dataMsg').html('');
         })
     });
 
@@ -123,7 +127,10 @@ $(function() {
         // Prevent normal submission
         event.preventDefault();
 
-        $.get('/querySVD/'+$('#search').val(), function(data) {
+        $('#svdResults').html('');
+        $('#svdMsg').html('<p class="text-center">Currently analyzing...</p>');
+
+        $.get('/querySVD/'+$('#enterSVD').val(), function(data) {
             $('#dataResult').html('');
             console.log(data);
             var item = '';
@@ -134,6 +141,7 @@ $(function() {
                 console.log(item);
             })
             $('#svdResults').append(item)
+            $('#svdMsg').html('');
         })
     });
 });

@@ -88,19 +88,19 @@ def svdStart(search):
         cached_results= [p,q,data,dataDF]
     
     prediction = predict_rating(p,q,1,3448,dataDF) #TODO change 1 to random user
-    #returns recomendations in JSON form
-    # return {"prediction":prediction}
+    # returns recomendations in JSON form
+    return {"prediction":prediction}
     # Temporary format of JSON
-    return {"items": [
-        {
-            "userID": 123,
-            "affinity": 4.7
-        },
-        {
-            "userID": 135,
-            "affinity": 9.8
-        }
-    ]}
+    # return {"items": [
+    #     {
+    #         "userID": 123,
+    #         "affinity": 4.7
+    #     },
+    #     {
+    #         "userID": 135,
+    #         "affinity": 9.8
+    #     }
+    # ]}
 
 @app.after_request
 def after_request(response):
