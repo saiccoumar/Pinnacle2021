@@ -16,10 +16,10 @@ def calcCorrelations(cur,item,threshold):
 def autocomplete(con,string):
     con.create_collation("edits", collation(string).collate)
     if len(string)<100:
-        titles = con.execute(f"select name from itemInfo where name like '%{string}%' limit 5").fetchall()
+        titles = con.execute("select name from itemInfo where name like ? limit 5",("%"+string+"%",)).fetchall()
     else:
         #titles = con.execute(f"select name from itemInfo order by name collate edits desc limit 5").fetchall()
-        titles = con.execute(f"select name from itemInfo where name like '%{string}%' limit 5").fetchall()
+        titles = con.execute("select name from itemInfo where name like ? limit 5",("%"+string+"%",)).fetchall()
     print(titles[:5])
     titlesSingle = itertools.chain.from_iterable(titles)
     

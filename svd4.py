@@ -68,9 +68,9 @@ def SVD(epochs,learning_rate=0.01,latent_features=6,db="movies2.db"):
     dataDF=data.pivot_table(index='user', columns='itemID', values='rating',fill_value=0)
 
 
-    print("TRAIN")
-    print(dataDF.shape)
-    print(dataDF.head())
+    # print("TRAIN")
+    # print(dataDF.shape)
+    # print(dataDF.head())
 
 
 # NEW END
@@ -80,18 +80,20 @@ def SVD(epochs,learning_rate=0.01,latent_features=6,db="movies2.db"):
     q = np.random.uniform(0,1.1,size=(latent_features, data.shape[1]))
 
     num_ratings = np.count_nonzero(~np.isnan(data))
-
+    print(f"numratings:{num_ratings}")
     sse_accum = 0
+    
+    # print("PRED")
+    # print(pred)
+    # print("DATA")
+    # print(data)
     pred = p.dot(q)
-    print("PRED")
-    print(pred)
-    print("DATA")
-    print(data)
     print("DELTA")
     print(pred-data)
 
     for epoch in range(epochs):
         sse_accum=0
+        num_ratings = 0
         for i in range(data.shape[0]):
             for j in range(data.shape[1]):
                 # sse_accum = 0
@@ -100,11 +102,16 @@ def SVD(epochs,learning_rate=0.01,latent_features=6,db="movies2.db"):
 #             print(data[i,j])
                 if data[i, j] > 0:
                     diff = data[i, j] - np.dot(p[i, :], q[:, j])
+                    num_ratings += 1
                     sse_accum += diff**2 #keep tracking the sum of square error for the matrix
                     for k in range(latent_features):
                         p[i, k] += learning_rate * (2*diff*q[k, j])
                         q[k, j] += learning_rate * (2*diff*p[i, k])
         learning_rate = learning_rate/1.02
+        pred = p.dot(q)
+        pred[np.where(data == 0)] = 0
+        print("DELTA")
+        print(pred-data)
         print("%d \t\t %f" % (epoch+1, sse_accum / num_ratings))
     return(p,q,data,dataDF)
 def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_features=6):
@@ -124,6 +131,7 @@ def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_f
 
     for epoch in range(epochs):
         sse_accum=0
+        num_ratings = 0
         for i in range(data.shape[0]):
             for j in range(data.shape[1]):
                 # sse_accum = 0
@@ -132,6 +140,7 @@ def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_f
 #             print(data[i,j])
                 if data[i, j] > 0:
                     diff = data[i, j] - np.dot(p[i, :], q[:, j])
+                    num_ratings += 1
                     sse_accum += diff**2 #keep tracking the sum of square error for the matrix
                     for k in range(latent_features):
                         p[i, k] += learning_rate * (2*diff*q[k, j])
@@ -139,8 +148,8 @@ def SVDUpgrade(d,epochs, user_matrix, item_matrix, learning_rate=0.0001,latent_f
         learning_rate = learning_rate/1.02
         print("%d \t\t %f" % (epoch+1, sse_accum / num_ratings))
     return(p,q)
-# p,q,data,dataDF=SVD(4)
-# p,q=SVDUpgrade(data, 3,p,q)
+#p,q,data,dataDF=SVD(7)
+#p,q=SVDUpgrade(data, 3,p,q)
 # print(predict_rating(p,q,1,3448,dataDF))
 # print(predict_rating(p,q,1,2692,dataDF))
 # print(predict_rating(p,q,1,2843,dataDF))

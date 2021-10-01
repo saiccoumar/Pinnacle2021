@@ -19,7 +19,7 @@ templateDir = './templates/'
 app = Flask(__name__,static_folder=statDir,
             template_folder=templateDir)
 
-dbFile = 'movies2.db'
+dbFile = 'movies3.db'
 cached_results = None
 def connect(db = dbFile):
     con = sqlite3.connect(dbFile)

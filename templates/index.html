@@ -1,142 +1,145 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#ffbd95">
-        
-        <title>dAURA</title>
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffbd95">
 
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    </head>
-    <body>
-        <div class="landing">
-            <div class="d-flex">
-                <div class="container">
-                    <div class="text-center pt-5 pb-5">
-                        <i id="easterEgg" class="fas fa-dragon fa-5x pb-3"></i>
-                        <img src="{{ url_for('static', filename='dbz.png') }}" id="dbz">
-                        <h2 class="text-center">dAURA</h2>
-                        <p class="opacity-50">Application of AURA</p>
-                        <div class="d-inline-flex align-items-center mt-3">
-                            <span class="p-3" id="togglePearsonTxt">Pearson</span>
-                            <label class="switch">
+    <title>dAURA</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <div class="landing">
+        <div class="d-flex">
+            <div class="container">
+                <div class="text-center pt-5 pb-5">
+                    <i id="easterEgg" class="fas fa-dragon fa-5x pb-3"></i>
+                    <img src="{{ url_for('static', filename='dbz.png') }}" id="dbz">
+                    <h2 class="text-center">dAURA</h2>
+                    <p class="opacity-50">Application of AURA</p>
+                    <div class="d-inline-flex align-items-center mt-3">
+                        <span class="p-3" id="togglePearsonTxt">Pearson</span>
+                        <label class="switch">
                                 <input type="checkbox" id="toggler">
                                 <span class="slider round"></span>
                             </label>
-                            <span class="p-3" id="toggleSVDTxt">Funk SVD</span>
-                        </div>
-                        
+                        <span class="p-3" id="toggleSVDTxt">Funk SVD</span>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="search">
-            <div class="d-flex">
-                <div class="container">
-                    <div class="text-center pt-3 pb-3">
-                        <div class="pearson">
-                            <form class="w-50 d-inline-flex" id="searchFormPearson">
-                                <div class="d-flex flex-column w-100">
-                                    <input type="text" id="search" class="form-control roundInput" placeholder="What to recommend from?">
-                                    <div class="searchDrop text-start">
-                                        <span class="d-block pt-1 pb-1">Must enter exact search query!</span>
-                                    </div>
+    <div class="search">
+        <div class="d-flex">
+            <div class="container">
+                <div class="text-center pt-3 pb-3">
+                    <div class="pearson">
+                        <form class="w-50 d-inline-flex" id="searchFormPearson" autocomplete="off">
+                            <div class="d-flex flex-column w-100">
+                                <input type="text" id="search" class="form-control roundInput" placeholder="What to recommend from?">
+                                <div class="searchDrop text-start">
+                                    <span class="d-block pt-1 pb-1">Must enter exact search query!</span>
                                 </div>
-                            </form>
-                            <a href="javascript:{}" id="searchBtn" class="p-3" onclick="$('#searchFormPearson').submit()"><i class="fas fa-search"></i></a>
-                        </div>
-
-                        <div class="svd">
-                            <form class="w-50 d-inline-flex" id="enterDataSVD">
-                                <div class="d-flex flex-column w-100">
-                                    <input type="text" id="enterSVD" class="form-control roundInput" placeholder="What to calculate?">
-                                    <div class="searchDropSVD text-start">
-                                        <span class="d-block pt-1 pb-1">Must enter exact search query!</span>
-                                    </div>
-                                </div>
-                            </form>
-                            <a href="javascript:{}" id="enterBtn" class="p-3" onclick="$('#enterDataSVD').submit()"><i class="fas fa-sign-in-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="addModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modaltitle">Add Dataset Entry</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <input type="text" class="form-control roundInput mb-3" placeholder="Name">
-                            <input type="text" class="form-control roundInput mb-3" placeholder="Product">
-                            <label for="rating" class="form-label">Rating <span class="opacity-50"><span id="ratingNum">5</span>/10</span></label>
-                            <input type="range" class="form-range" min="0" max="10" id="rating">
+                            </div>
                         </form>
+                        <a href="javascript:{}" id="searchBtn" class="p-3" onclick="$('#searchFormPearson').submit()"><i class="fas fa-search"></i></a>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary">Add Entry</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="stickyAdjust"></div>
-
-        <div class="pearsonResults pearson">
-            <div class="d-flex">
-                <div class="container">
-                    <div class="pt-5 pb-5">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td>Product ID</td>
-                                    <td>Frequency</td>
-                                    <td>Correlation</td>
-                                </tr>
-                            </thead>
-                            <tbody id="dataResult"></tbody>
-                        </table>
-                        <div id="dataMsg" class="opacity-50"></div>
+                    <div class="svd">
+                        <form class="w-50 d-inline-flex" id="enterDataSVD" autocomplete="off">
+                            <div class="d-flex flex-column w-100">
+                                <input type="text" id="enterSVD" class="form-control roundInput" placeholder="What to calculate?">
+                                <div class="searchDropSVD text-start">
+                                    <span class="d-block pt-1 pb-1">Must enter exact search query!</span>
+                                </div>
+                            </div>
+                        </form>
+                        <a href="javascript:{}" id="enterBtn" class="p-3" onclick="$('#enterDataSVD').submit()"><i class="fas fa-sign-in-alt"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="svdResults svd">
-            <div class="d-flex">
-                <div class="container">
-                    <div class="pt-5 pb-5">
-                        <div class="row" id="svdResults"></div>
-                        <div id="svdMsg"></div>
-                    </div>
+    <div class="modal fade" id="addModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modaltitle">Add Dataset Entry</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="text" class="form-control roundInput mb-3" placeholder="Name">
+                        <input type="text" class="form-control roundInput mb-3" placeholder="Product">
+                        <label for="rating" class="form-label">Rating <span class="opacity-50"><span id="ratingNum">5</span>/10</span></label>
+                        <input type="range" class="form-range" min="0" max="10" id="rating">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Add Entry</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer">
-            <div class="d-flex">
-                <div class="container">
-                    <div class="pt-5 pb-5">
-                        <p class="opacity-75"><a href="https://github.com/saiccoumar/Pinnacle2021"><i class="fab fa-github fa-2x"></i></a></p>
-                        <p class="opacity-75">Albert Lua, Sai Coumar, Jason Leong, Daniel Trager</p>
-                        <p class="opacity-75">Project for <a href="https://pinnacle.us.org/">Pinnacle 2021</a></p>
-                    </div>
+    <div class="stickyAdjust"></div>
+
+    <div class="pearsonResults pearson">
+        <div class="d-flex">
+            <div class="container">
+                <div class="pt-5 pb-5">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Product ID</td>
+                                <td>Frequency</td>
+                                <td>Correlation</td>
+                            </tr>
+                        </thead>
+                        <tbody id="dataResult"></tbody>
+                    </table>
+                    <div id="dataMsg" class="opacity-50"></div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    </body>
+    <div class="svdResults svd">
+        <div class="d-flex">
+            <div class="container">
+                <div class="pt-5 pb-5">
+                    <div class="row" id="svdResults"></div>
+                    <div id="svdMsg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="d-flex">
+            <div class="container">
+                <div class="pt-5 pb-5">
+                    <p class="opacity-75"><a href="https://github.com/saiccoumar/Pinnacle2021"><i class="fab fa-github fa-2x"></i></a></p>
+                    <p class="opacity-75">Albert Lua, Sai Coumar, Jason Leong, Daniel Trager</p>
+                    <p class="opacity-75">Project for <a href="https://pinnacle.us.org/">Pinnacle 2021</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
 </html>
